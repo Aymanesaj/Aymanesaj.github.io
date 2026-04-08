@@ -1,109 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Aymane Sajed</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #0f172a;
-            color: #e2e8f0;
-        }
-        header {
-            text-align: center;
-            padding: 60px 20px;
-        }
-        h1 { font-size: 40px; }
-        section {
-            max-width: 900px;
-            margin: auto;
-            padding: 40px 20px;
-        }
-        .project {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: #1e293b;
-            border-radius: 10px;
-        }
-        a { color: #38bdf8; text-decoration: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aymane Sajed</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #020617;
+    color: #e2e8f0;
+}
+
+.section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 80px 20px;
+}
+
+h1 { font-size: 48px; margin: 0; }
+h2 { font-size: 32px; margin-bottom: 20px; }
+
+.glass {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.hero {
+    text-align: center;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-top: 10px;
+}
+
+.skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.skill {
+    text-align: center;
+    transition: 0.3s;
+}
+
+.skill:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
+}
+
+.projects {
+    display: grid;
+    gap: 20px;
+}
+
+.project {
+    transition: 0.3s;
+}
+
+.project:hover {
+    transform: scale(1.02);
+    border-color: #38bdf8;
+}
+
+.accent {
+    color: #38bdf8;
+}
+
+.contact {
+    text-align: center;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-    <h1>Aymane Sajid</h1>
-    <p>Backend & Systems Developer</p>
-</header>
-
-<section>
-    <h2>About Me</h2>
-    <p>
-        I’m a systems-oriented developer focused on low-level programming, networking,
-        and building software from scratch. I enjoy understanding how things work
-        under the hood — from memory management to HTTP servers.
+<!-- HERO -->
+<section class="section hero">
+    <h1>Aymane Sajed</h1>
+    <p class="subtitle">Systems & Backend Developer | Aspiring DevOps Engineer</p>
+    <p class="subtitle" style="margin-top:20px;">
+        Focused on low-level systems, Linux environments, and infrastructure engineering.
     </p>
 </section>
 
-<section>
+<!-- ABOUT -->
+<section class="section">
+    <h2>About</h2>
+    <div class="glass">
+        <p>
+            I am a student at 1337 coding school, specializing in systems programming,
+            backend development, and DevOps practices. I focus on understanding how
+            software operates at a low level—from memory management to system architecture.
+        </p>
+        <p style="margin-top:15px;">
+            I actively work with Linux environments (Arch & Ubuntu) and founded a DevOps
+            peer-learning club to deepen practical infrastructure knowledge.
+        </p>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section">
+    <h2>Core Skills</h2>
+    <div class="skills">
+        <div class="glass skill">C / C++</div>
+        <div class="glass skill">Docker</div>
+        <div class="glass skill">Linux</div>
+        <div class="glass skill">Python (Flask)</div>
+        <div class="glass skill">Shell</div>
+        <div class="glass skill">Sockets</div>
+        <div class="glass skill">Memory</div>
+        <div class="glass skill">Raycasting</div>
+        <div class="glass skill">Git</div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section">
     <h2>Projects</h2>
 
-    <div class="project">
-        <h3>Webserv (HTTP Server in C)</h3>
-        <p>
-            Built a custom HTTP server handling sockets, requests parsing,
-            multiple clients, and configuration files.
-        </p>
-    </div>
+    <div class="projects">
 
-    <div class="project">
-        <h3>Minishell</h3>
-        <p>
-            Implemented a shell with parsing, pipes, redirections,
-            and process management using fork, exec, and wait.
-        </p>
-    </div>
+        <div class="glass project">
+            <h3 class="accent">Webserv</h3>
+            <p>
+                Custom HTTP server in C++ handling sockets, non-blocking I/O,
+                multiple clients, and configuration parsing.
+            </p>
+        </div>
 
-    <div class="project">
-        <h3>Push_swap</h3>
-        <p>
-            Developed an optimized sorting algorithm using stacks
-            with strict operation constraints.
-        </p>
-    </div>
+        <div class="glass project">
+            <h3 class="accent">Inception</h3>
+            <p>
+                Dockerized infrastructure using Nginx, WordPress, and MariaDB
+                with Docker Compose.
+            </p>
+        </div>
 
-    <div class="project">
-        <h3>ft_printf</h3>
-        <p>
-            Recreated printf with support for multiple format specifiers,
-            focusing on memory and formatting precision.
-        </p>
-    </div>
+        <div class="glass project">
+            <h3 class="accent">Raycasting Engine</h3>
+            <p>
+                3D engine in C with texture mapping and optimized rendering.
+            </p>
+        </div>
 
-    <div class="project">
-        <h3>Get Next Line</h3>
-        <p>
-            Implemented buffered file reading with static memory
-            and efficient line extraction.
-        </p>
-    </div>
+        <div class="glass project">
+            <h3 class="accent">Minishell</h3>
+            <p>
+                Shell implementation with pipes, redirections, and process management.
+            </p>
+        </div>
 
+        <div class="glass project">
+            <h3 class="accent">Algorithm & Systems Suite</h3>
+            <p>
+                Push_swap, ft_printf, Get Next Line — focused on algorithms,
+                memory management, and low-level behavior.
+            </p>
+        </div>
+
+    </div>
 </section>
 
-<section>
-    <h2>Skills</h2>
-    <p>
-        C, UNIX, Sockets, Processes, Memory Management, Parsing,
-        HTTP Protocol, Git
-    </p>
-</section>
-
-<section>
+<!-- CONTACT -->
+<section class="section contact">
     <h2>Contact</h2>
-    <p>
-        GitHub: <a href="https://github.com/Aymanesaj">Aymanesaj</a><br>
-        Email: Contact@aymanesajed.com
+    <p class="subtitle">Open to internships and system-level opportunities</p>
+    <p class="accent" style="margin-top:10px;">
+        contact@aymanesajed.com
     </p>
 </section>
 
