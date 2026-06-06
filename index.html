@@ -3,1196 +3,717 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aymane Sajed</title>
-<meta name="description" content="Aymane Sajed — Systems & Backend Developer | Aspiring DevOps Engineer" />
+<title>Aymane Sajed — DevOps & Systems Engineer</title>
+<meta name="description" content="Aymane Sajed — DevOps & Systems Engineer at 1337 Coding School. Cloud-native architecture, infrastructure automation, and low-level systems." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <style>
-  :root{
-    --bg: #f4efe7;
-    --bg2: #ece5da;
-    --panel: rgba(255,255,255,.72);
-    --panel-strong: rgba(255,255,255,.9);
-    --text: #101828;
-    --muted: #475467;
-    --soft: #667085;
-    --line: rgba(16,24,40,.12);
-    --line-strong: rgba(16,24,40,.18);
-    --accent: #0f766e;
-    --accent-2: #1d4ed8;
-    --accent-3: #7c3aed;
-    --shadow: 0 18px 50px rgba(16,24,40,.08);
-    --shadow-soft: 0 10px 24px rgba(16,24,40,.05);
-    --radius: 22px;
-    --radius-sm: 16px;
-    --max: 1180px;
+  :root {
+    --bg: #09090b;
+    --card: #121214;
+    --card-hover: #18181b;
+    --heading: #ededed;
+    --body: #a1a1aa;
+    --muted: #71717a;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.14);
+    --accent-cyan: #22d3ee;
+    --accent-purple: #a78bfa;
+    --accent-glow: rgba(34, 211, 238, 0.18);
+    --accent-glow-purple: rgba(167, 139, 250, 0.15);
+    --radius: 16px;
+    --transition: 0.3s ease-in-out;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    --max-width: 1280px;
   }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-color: #3f3f46 var(--bg);
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+    border-radius: 999px;
+    border: 2px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
   body {
     margin: 0;
-    color: var(--text);
-    background:
-      radial-gradient(circle at top left, rgba(29,78,216,.08), transparent 28%),
-      radial-gradient(circle at top right, rgba(15,118,110,.08), transparent 25%),
-      linear-gradient(180deg, var(--bg), var(--bg2));
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    line-height: 1.6;
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--body);
+    background: var(--bg);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* subtle paper/grid texture */
-  body::before{
-    content:"";
+  /* Animated ambient gradient */
+  body::before {
+    content: "";
     position: fixed;
-    inset: 0;
+    inset: -50%;
+    z-index: 0;
     pointer-events: none;
     background:
-      linear-gradient(to right, rgba(16,24,40,.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(16,24,40,.035) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,.42), transparent 90%);
-    opacity: .6;
-    z-index: 0;
+      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(34, 211, 238, 0.07), transparent 55%),
+      radial-gradient(ellipse 50% 45% at 80% 10%, rgba(167, 139, 250, 0.06), transparent 50%),
+      radial-gradient(ellipse 55% 40% at 60% 90%, rgba(34, 211, 238, 0.04), transparent 55%),
+      radial-gradient(ellipse 40% 35% at 10% 80%, rgba(167, 139, 250, 0.05), transparent 50%);
+    animation: ambient-drift 28s ease-in-out infinite alternate;
+  }
+
+  @keyframes ambient-drift {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33%  { transform: translate(2%, -1.5%) rotate(1deg) scale(1.03); }
+    66%  { transform: translate(-1.5%, 2%) rotate(-0.5deg) scale(1.01); }
+    100% { transform: translate(1%, 1.5%) rotate(0.5deg) scale(1.02); }
   }
 
   a { color: inherit; text-decoration: none; }
-  .wrap { position: relative; z-index: 1; }
 
-  .container {
-    width: min(var(--max), calc(100% - 40px));
+  .page {
+    position: relative;
+    z-index: 1;
+    width: min(var(--max-width), calc(100% - 40px));
     margin: 0 auto;
+    padding: 48px 0 64px;
   }
 
-  /* top bar */
-  .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    backdrop-filter: blur(16px);
-    background: rgba(244,239,231,.72);
-    border-bottom: 1px solid rgba(16,24,40,.08);
+  /* ── Bento Grid ── */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(148px, auto);
+    gap: 18px;
   }
 
-  .topbar-inner{
-    height: 72px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 16px;
-  }
-
-  .brand {
-    display:flex;
-    align-items:center;
-    gap: 12px;
-    font-weight: 700;
-    letter-spacing: -.02em;
-  }
-
-  .brand-mark{
-    width: 12px;
-    height: 12px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    box-shadow: 0 0 0 6px rgba(15,118,110,.08);
-  }
-
-  .nav {
-    display:flex;
-    align-items:center;
-    gap: 22px;
-    flex-wrap: wrap;
-  }
-
-  .nav a{
+  /* ── Card base ── */
+  .card {
     position: relative;
-    color: var(--soft);
-    font-size: 14px;
-    font-weight: 600;
-    transition: color .2s ease;
+    border-radius: var(--radius);
+    background: rgba(18, 18, 20, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    padding: 24px;
+    overflow: hidden;
+    transition:
+      transform var(--transition),
+      box-shadow var(--transition),
+      border-color var(--transition),
+      background var(--transition);
   }
 
-  .nav a:hover,
-  .nav a.active{
-    color: var(--text);
-  }
-
-  .nav a::after{
-    content:"";
-    position:absolute;
-    left: 0;
-    bottom: -8px;
-    width: 100%;
-    height: 2px;
-    transform: scaleX(0);
-    transform-origin: left;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    transition: transform .22s ease;
-  }
-
-  .nav a.active::after,
-  .nav a:hover::after{
-    transform: scaleX(1);
-  }
-
-  /* hero */
-  .hero{
-    padding: 68px 0 34px;
-  }
-
-  .hero-grid{
-    display:grid;
-    grid-template-columns: 1.45fr .9fr;
-    gap: 24px;
-    align-items: stretch;
-  }
-
-  .hero-main,
-  .hero-side,
-  .panel,
-  .card,
-  .timeline-item{
-    border: 1px solid rgba(16,24,40,.09);
-    background: var(--panel);
-    backdrop-filter: blur(16px);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .hero-main{
-    border-radius: 30px;
-    padding: 34px;
-    min-height: 520px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    overflow:hidden;
-    position: relative;
-  }
-
-  .hero-main::before{
-    content:"";
-    position:absolute;
+  .card::before {
+    content: "";
+    position: absolute;
     inset: 0;
-    background:
-      radial-gradient(circle at 10% 10%, rgba(29,78,216,.08), transparent 22%),
-      radial-gradient(circle at 90% 20%, rgba(15,118,110,.10), transparent 20%);
-    pointer-events:none;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%);
+    pointer-events: none;
   }
 
-  .eyebrow{
-    display:inline-flex;
-    align-items:center;
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+    background: rgba(24, 24, 27, 0.82);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(34, 211, 238, 0.08),
+      0 0 40px var(--accent-glow),
+      0 0 80px var(--accent-glow-purple);
+  }
+
+  .card-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 12px;
+  }
+
+  .card-title {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--heading);
+    line-height: 1.2;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.6;
+  }
+
+  /* ── Grid placement ── */
+  .hero       { grid-column: 1 / 3; grid-row: 1 / 3; }
+  .focus      { grid-column: 3;     grid-row: 1 / 3; }
+  .social-gh  { grid-column: 4;     grid-row: 1; }
+  .social-li  { grid-column: 4;     grid-row: 2; }
+  .sysrun     { grid-column: 1;     grid-row: 3; }
+  .inception  { grid-column: 2;     grid-row: 3; }
+  .webserv    { grid-column: 3 / 5; grid-row: 3; }
+  .mini-rt    { grid-column: 1 / 3; grid-row: 4; }
+  .skills     { grid-column: 3 / 5; grid-row: 4; }
+  .leadership { grid-column: 1 / 3; grid-row: 5; }
+  .social-em  { grid-column: 3;     grid-row: 5; }
+  .social-web { grid-column: 4;     grid-row: 5; }
+
+  /* ── Hero ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 320px;
+    padding: 32px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
     gap: 8px;
     width: fit-content;
-    padding: 8px 12px;
+    padding: 6px 12px;
     border-radius: 999px;
-    background: rgba(255,255,255,.7);
-    border: 1px solid rgba(16,24,40,.08);
-    color: var(--accent);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .02em;
-    position: relative;
-    z-index: 1;
+    background: rgba(34, 211, 238, 0.08);
+    border: 1px solid rgba(34, 211, 238, 0.18);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--accent-cyan);
+    margin-bottom: 20px;
   }
 
-  .eyebrow-dot{
-    width: 8px;
-    height: 8px;
+  .hero-badge::before {
+    content: "";
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--accent);
+    background: var(--accent-cyan);
+    box-shadow: 0 0 8px var(--accent-cyan);
+    animation: pulse-dot 2.4s ease-in-out infinite;
   }
 
-  h1{
-    margin: 18px 0 14px;
-    font-size: clamp(3rem, 7vw, 6.2rem);
-    line-height: .95;
-    letter-spacing: -.06em;
-    max-width: 8ch;
-    position: relative;
-    z-index: 1;
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.85); }
   }
 
-  .hero-copy{
-    max-width: 58ch;
-    font-size: 18px;
-    color: var(--muted);
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-meta{
-    margin-top: 24px;
-    display:flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-
-  .tag{
-    display:inline-flex;
-    align-items:center;
-    gap: 8px;
-    padding: 10px 14px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.74);
-    border: 1px solid rgba(16,24,40,.08);
-    color: var(--text);
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  .tag i{
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--accent-3), var(--accent-2));
-    display:inline-block;
-  }
-
-  .cta-row{
-    display:flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 28px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap: 10px;
-    height: 48px;
-    padding: 0 18px;
-    border-radius: 14px;
-    font-weight: 700;
-    font-size: 14px;
-    border: 1px solid rgba(16,24,40,.1);
-    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-    will-change: transform;
-  }
-
-  .btn:hover{
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .btn-primary{
-    color: white;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    border: none;
-  }
-
-  .btn-secondary{
-    background: rgba(255,255,255,.82);
-    color: var(--text);
-  }
-
-  .hero-side{
-    border-radius: 30px;
-    padding: 22px;
-    display:flex;
-    flex-direction:column;
-    gap: 14px;
-  }
-
-  .side-card{
-    border-radius: 22px;
-    padding: 18px;
-    background: var(--panel-strong);
-    border: 1px solid rgba(16,24,40,.08);
-  }
-
-  .stat-grid{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .stat{
-    border-radius: 18px;
-    padding: 16px;
-    background: rgba(255,255,255,.8);
-    border: 1px solid rgba(16,24,40,.08);
-  }
-
-  .stat .k{
-    display:block;
-    font-size: 12px;
-    color: var(--soft);
-    text-transform: uppercase;
-    letter-spacing: .08em;
-  }
-
-  .stat .v{
-    display:block;
-    margin-top: 8px;
-    font-size: 18px;
+  .hero h1 {
+    margin: 0 0 14px;
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
     font-weight: 800;
-    letter-spacing: -.03em;
-  }
-
-  .signal{
-    display:flex;
-    flex-direction:column;
-    gap: 10px;
-  }
-
-  .signal-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(16,24,40,.08);
-  }
-
-  .signal-row:last-child{ border-bottom:none; }
-  .signal-row span:first-child{ color: var(--soft); font-size: 14px; }
-  .signal-row strong{ font-size: 14px; }
-
-  .section{
-    padding: 24px 0 0;
-  }
-
-  .section-head{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap: 16px;
-    margin: 32px 0 18px;
-  }
-
-  .section-title{
-    margin: 0;
-    font-size: clamp(1.6rem, 3vw, 2.35rem);
-    letter-spacing: -.04em;
+    letter-spacing: -0.05em;
     line-height: 1.05;
+    color: var(--heading);
   }
 
-  .section-note{
-    max-width: 56ch;
-    color: var(--muted);
-    font-size: 15px;
+  /* Pure CSS typing animation */
+  .typing-wrap {
+    display: block;
+    margin-bottom: 18px;
+    min-height: 1.5em;
   }
 
-  .grid-2{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-
-  .panel{
-    border-radius: 26px;
-    padding: 24px;
-  }
-
-  .panel p{
-    margin: 0;
-    color: var(--muted);
-    font-size: 16px;
-  }
-
-  .callout{
-    display:flex;
-    gap: 14px;
-    align-items:flex-start;
-    padding: 18px;
-    border-radius: 18px;
-    background: rgba(255,255,255,.76);
-    border: 1px solid rgba(16,24,40,.08);
-  }
-
-  .callout .dot{
-    width: 10px;
-    height: 10px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    margin-top: 6px;
-    flex: none;
-  }
-
-  .callout strong{ display:block; margin-bottom: 6px; }
-  .callout span{ color: var(--muted); }
-
-  .chips{
-    display:flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
-  }
-
-  .chip{
-    display:inline-flex;
-    align-items:center;
-    padding: 9px 12px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.78);
-    border: 1px solid rgba(16,24,40,.08);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  /* journey */
-  .timeline{
-    display:grid;
-    gap: 14px;
-  }
-
-  .timeline-item{
-    border-radius: 22px;
-    padding: 20px;
-    display:grid;
-    grid-template-columns: 130px 1fr;
-    gap: 18px;
-    align-items:start;
-  }
-
-  .timeline-time{
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    color: var(--accent);
-    font-weight: 800;
-  }
-
-  .timeline-body h3{
-    margin: 0 0 8px;
-    font-size: 18px;
-    letter-spacing: -.02em;
-  }
-
-  .timeline-body p{
-    margin: 0;
-    color: var(--muted);
-  }
-
-  /* projects */
-  .projects{
-    display:grid;
-    gap: 18px;
-  }
-
-  .project{
-    border-radius: 26px;
-    overflow:hidden;
-    padding: 0;
-  }
-
-  .project-top{
-    padding: 22px 22px 16px;
-    border-bottom: 1px solid rgba(16,24,40,.08);
-    display:flex;
-    justify-content:space-between;
-    gap: 16px;
-    align-items:flex-start;
-  }
-
-  .project-name{
-    margin: 0;
-    font-size: 26px;
-    letter-spacing: -.04em;
-    line-height: 1.05;
-  }
-
-  .project-role{
-    color: var(--soft);
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: .09em;
-    font-weight: 800;
+  .typing {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 1.6vw, 1rem);
+    font-weight: 500;
+    color: var(--accent-cyan);
     white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid var(--accent-cyan);
+    width: 0;
+    animation:
+      typing 3.2s steps(32, end) 0.6s forwards,
+      blink-caret 0.7s step-end 0.6s 6,
+      blink-caret-infinite 0.9s step-end 4.8s infinite;
   }
 
-  .project-content{
-    padding: 22px;
-    display:grid;
-    grid-template-columns: 1.15fr .85fr;
-    gap: 18px;
+  @keyframes typing {
+    from { width: 0; }
+    to   { width: 32ch; }
   }
 
-  .project-desc{
-    color: var(--muted);
-    margin: 0;
-    font-size: 16px;
+  @keyframes blink-caret {
+    0%, 100% { border-color: var(--accent-cyan); }
+    50%       { border-color: transparent; }
   }
 
-  .project-list{
-    margin: 14px 0 0;
-    padding: 0;
-    list-style: none;
-    display:grid;
-    gap: 10px;
+  @keyframes blink-caret-infinite {
+    0%, 100% { border-color: var(--accent-cyan); }
+    50%       { border-color: transparent; }
   }
 
-  .project-list li{
-    position: relative;
-    padding-left: 18px;
-    color: var(--muted);
-    font-size: 15px;
-  }
-
-  .project-list li::before{
-    content:"";
-    position:absolute;
-    left: 0;
-    top: .65em;
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  }
-
-  .project-meta{
-    display:grid;
-    gap: 12px;
-    align-content:start;
-  }
-
-  .meta-box{
-    border-radius: 18px;
-    padding: 14px;
-    background: rgba(255,255,255,.76);
-    border: 1px solid rgba(16,24,40,.08);
-  }
-
-  .meta-box .label{
-    font-size: 12px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--soft);
-    font-weight: 800;
-  }
-
-  .meta-box .value{
-    margin-top: 8px;
+  .hero-subtitle {
     font-size: 14px;
-    color: var(--text);
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-weight: 500;
+  }
+
+  .hero-bio {
+    max-width: 52ch;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .hero-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .hero-footer span {
+    color: var(--accent-purple);
     font-weight: 600;
   }
 
-  .project-links{
-    display:flex;
-    flex-wrap: wrap;
+  /* ── Focus card ── */
+  .focus-list {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
-    margin-top: 10px;
   }
 
-  .repo-grid{
-    display:grid;
+  .focus-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--body);
+  }
+
+  .focus-list li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  }
+
+  .milestone-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    background: rgba(167, 139, 250, 0.08);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-purple);
+  }
+
+  /* ── Tech tags ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 16px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--body);
+    letter-spacing: 0.02em;
+    transition: border-color var(--transition), color var(--transition);
+  }
+
+  .card:hover .tag {
+    border-color: rgba(34, 211, 238, 0.15);
+  }
+
+  /* ── Skills ── */
+  .skills-grid {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
+    margin-top: 8px;
   }
 
-  .repo-card{
-    border-radius: 22px;
-    padding: 18px;
-    background: rgba(255,255,255,.76);
-    border: 1px solid rgba(16,24,40,.08);
-    transition: transform .2s ease, box-shadow .2s ease;
-  }
-
-  .repo-card:hover{
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
-  }
-
-  .repo-card h3{
-    margin: 0 0 8px;
-    font-size: 18px;
-    letter-spacing: -.03em;
-  }
-
-  .repo-card p{
-    margin: 0 0 16px;
-    color: var(--muted);
-    font-size: 15px;
-  }
-
-  .repo-card .repo{
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    color: var(--accent-2);
-    font-size: 13px;
-    word-break: break-all;
-  }
-
-  /* contact */
-  .contact{
-    padding-bottom: 56px;
-  }
-
-  .contact-box{
-    border-radius: 30px;
-    padding: 28px;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.74)),
-      linear-gradient(135deg, rgba(15,118,110,.08), rgba(29,78,216,.08));
-    border: 1px solid rgba(16,24,40,.08);
-    box-shadow: var(--shadow);
-  }
-
-  .contact-grid{
-    display:grid;
-    grid-template-columns: 1.2fr .8fr;
-    gap: 18px;
-    align-items:center;
-  }
-
-  .contact-box h2{
+  .skill-group h4 {
     margin: 0 0 10px;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    letter-spacing: -.04em;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--heading);
   }
 
-  .contact-box p{
-    margin: 0;
-    color: var(--muted);
-    max-width: 60ch;
-  }
+  .skill-group .tags { margin-top: 0; }
 
-  .contact-addr{
-    display:grid;
-    gap: 10px;
-    justify-items:start;
-  }
-
-  .contact-email{
+  /* ── Leadership ── */
+  .leadership-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(167, 139, 250, 0.1);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    margin-bottom: 16px;
     font-size: 18px;
-    font-weight: 800;
-    letter-spacing: -.02em;
-    color: var(--text);
   }
 
-  .footer{
-    padding: 26px 0 42px;
-    color: var(--soft);
-    font-size: 14px;
+  /* ── Social cells ── */
+  .social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
   }
 
-  /* reveal */
-  .reveal{
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity .7s ease, transform .7s ease;
+  .social .icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--body);
+    transition: color var(--transition), transform var(--transition);
   }
 
-  .reveal.visible{
-    opacity: 1;
-    transform: translateY(0);
+  .social:hover .icon {
+    color: var(--accent-cyan);
+    transform: scale(1.1);
   }
 
-  /* responsive */
-  @media (max-width: 980px){
-    .hero-grid,
-    .grid-2,
-    .project-content,
-    .contact-grid,
-    .repo-grid{
+  .social .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color var(--transition);
+  }
+
+  .social:hover .label { color: var(--heading); }
+
+  .social svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+  }
+
+  /* ── Footer strip ── */
+  .footer {
+    margin-top: 36px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .footer span { color: var(--accent-cyan); }
+
+  /* ── Tablet: 2 columns ── */
+  @media (max-width: 1024px) {
+    .bento {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero       { grid-column: 1 / 3; grid-row: auto; }
+    .focus      { grid-column: 1;     grid-row: auto; }
+    .social-gh  { grid-column: 2;     grid-row: auto; }
+    .social-li  { grid-column: 1;     grid-row: auto; }
+    .sysrun     { grid-column: 1;     grid-row: auto; }
+    .inception  { grid-column: 2;     grid-row: auto; }
+    .webserv    { grid-column: 1 / 3; grid-row: auto; }
+    .mini-rt    { grid-column: 1;     grid-row: auto; }
+    .skills     { grid-column: 2;     grid-row: auto; }
+    .leadership { grid-column: 1 / 3; grid-row: auto; }
+    .social-em  { grid-column: 1;     grid-row: auto; }
+    .social-web { grid-column: 2;     grid-row: auto; }
+
+    .skills-grid {
       grid-template-columns: 1fr;
-    }
-
-    .hero-main{
-      min-height: unset;
+      gap: 14px;
     }
   }
 
-  @media (max-width: 720px){
-    .topbar-inner{
-      height: auto;
-      padding: 16px 0;
-      align-items:flex-start;
-      flex-direction: column;
+  /* ── Mobile: 1 column ── */
+  @media (max-width: 600px) {
+    .page {
+      width: calc(100% - 28px);
+      padding: 28px 0 48px;
     }
 
-    .nav{
-      gap: 14px 18px;
-    }
-
-    .hero{
-      padding-top: 24px;
-    }
-
-    .hero-main,
-    .hero-side,
-    .panel,
-    .contact-box{
-      border-radius: 22px;
-    }
-
-    .hero-main{
-      padding: 24px;
-    }
-
-    .timeline-item{
+    .bento {
       grid-template-columns: 1fr;
+      gap: 14px;
     }
 
-    .section-head{
-      flex-direction: column;
-      align-items:flex-start;
+    .hero, .focus, .social-gh, .social-li,
+    .sysrun, .inception, .webserv, .mini-rt,
+    .skills, .leadership, .social-em, .social-web {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .hero { padding: 24px; min-height: unset; }
+    .card { padding: 20px; }
+
+    .typing {
+      font-size: 0.82rem;
+      animation:
+        typing-mobile 3.2s steps(32, end) 0.6s forwards,
+        blink-caret 0.7s step-end 0.6s 6,
+        blink-caret-infinite 0.9s step-end 4.8s infinite;
+    }
+
+    @keyframes typing-mobile {
+      from { width: 0; }
+      to   { width: 28ch; }
     }
   }
 
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior: auto; }
-    *, *::before, *::after{
-      animation: none !important;
-      transition: none !important;
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
     }
+    .typing {
+      width: 32ch;
+      border-right: none;
+    }
+    .card:hover { transform: none; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand">
-        <span class="brand-mark"></span>
-        <span>Aymane Sajed</span>
+<div class="page">
+
+  <main class="bento" aria-label="Portfolio">
+
+    <!-- Hero / Profile -->
+    <article class="card hero">
+      <div>
+        <div class="hero-badge">Available for opportunities</div>
+        <h1>Aymane Sajed</h1>
+        <div class="typing-wrap" aria-label="DevOps and Systems Engineer">
+          <span class="typing">DevOps &amp; Systems Engineer</span>
+        </div>
+        <p class="hero-subtitle">1337 Coding School</p>
+        <p class="hero-bio">
+          Passionate about low-level programming, cloud-native architecture, and building
+          systems from scratch. I engineer infrastructure that is observable, reproducible,
+          and production-ready — from kernel namespaces to TLS-terminated endpoints.
+        </p>
       </div>
-      <nav class="nav" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#journey">Journey</a>
-        <a href="#projects">Projects</a>
-        <a href="#repos">Repos</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+      <div class="hero-footer">
+        <span>//</span> systems · containers · automation
+      </div>
+    </article>
 
-  <main class="container">
+    <!-- Current Focus -->
+    <article class="card focus">
+      <p class="card-label">Current Focus</p>
+      <h2 class="card-title">Milestone 5</h2>
+      <p>Advancing through the DevOps curriculum at 1337 with hands-on infrastructure projects.</p>
+      <ul class="focus-list">
+        <li>Infrastructure as Code</li>
+        <li>Container Orchestration</li>
+        <li>Linux Systems</li>
+      </ul>
+      <div class="milestone-tag">1337 · DevOps Track</div>
+    </article>
 
-    <section class="hero">
-      <div class="hero-grid">
-        <div class="hero-main reveal">
-          <div>
-            <div class="eyebrow"><span class="eyebrow-dot"></span> Systems-first portfolio</div>
-            <h1>Aymane Sajed</h1>
-            <p class="hero-copy">
-              Systems & Backend Developer | Aspiring DevOps Engineer.
-              I build from fundamentals: memory, processes, Linux, containers, sockets, and clean backend logic.
-            </p>
+    <!-- Social: GitHub -->
+    <a class="card social social-gh" href="https://github.com/Aymanesaj" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+      </span>
+      <span class="label">GitHub</span>
+    </a>
 
-            <div class="hero-meta">
-              <span class="tag"><i></i> 1337 coding school</span>
-              <span class="tag"><i></i> Linux / Docker / C++</span>
-              <span class="tag"><i></i> DevOps peer-learning club founder</span>
-            </div>
+    <!-- Social: LinkedIn -->
+    <a class="card social social-li" href="https://www.linkedin.com/in/aymanesajed" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 4.126 0 2.062 2.062 0 0 1-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </span>
+      <span class="label">LinkedIn</span>
+    </a>
 
-            <div class="cta-row">
-              <a class="btn btn-primary" href="#projects">See selected work</a>
-              <a class="btn btn-secondary" href="https://github.com/Aymanesaj" target="_blank" rel="noreferrer">GitHub profile</a>
-            </div>
-          </div>
+    <!-- Project: SysRun -->
+    <article class="card sysrun">
+      <p class="card-label">Project</p>
+      <h2 class="card-title">SysRun</h2>
+      <p>Cloud infrastructure automation with reverse proxies and TLS-secured endpoints. Full CI/CD pipeline from code to production.</p>
+      <div class="tags">
+        <span class="tag">Terraform</span>
+        <span class="tag">OCI</span>
+        <span class="tag">Docker</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">TLS</span>
+      </div>
+    </article>
 
-          <div class="callout" style="margin-top: 28px;">
-            <span class="dot"></span>
-            <div>
-              <strong>Focus</strong>
-              <span>
-                Low-level programming, containerization, Linux environments, and the kind of engineering that
-                shows up in production systems, not just tutorials.
-              </span>
-            </div>
+    <!-- Project: Inception -->
+    <article class="card inception">
+      <p class="card-label">Project</p>
+      <h2 class="card-title">Inception</h2>
+      <p>Multi-container infrastructure with isolated networking across services.</p>
+      <div class="tags">
+        <span class="tag">Docker Compose</span>
+        <span class="tag">Nginx</span>
+        <span class="tag">MariaDB</span>
+        <span class="tag">WordPress</span>
+        <span class="tag">Redis</span>
+      </div>
+    </article>
+
+    <!-- Project: Webserv -->
+    <article class="card webserv">
+      <p class="card-label">Project</p>
+      <h2 class="card-title">Webserv</h2>
+      <p>Custom HTTP server built from scratch in C++. Handles socket networking, CGI execution, and non-blocking I/O for concurrent client handling.</p>
+      <div class="tags">
+        <span class="tag">C++</span>
+        <span class="tag">Sockets</span>
+        <span class="tag">CGI</span>
+        <span class="tag">Non-blocking I/O</span>
+        <span class="tag">HTTP/1.1</span>
+      </div>
+    </article>
+
+    <!-- Project: Mini Container Runtime -->
+    <article class="card mini-rt">
+      <p class="card-label">Project</p>
+      <h2 class="card-title">Mini Container Runtime</h2>
+      <p>Lightweight container runtime written in C using Linux namespaces, cgroups, and chroot — understanding containers at the kernel level.</p>
+      <div class="tags">
+        <span class="tag">C</span>
+        <span class="tag">Linux Namespaces</span>
+        <span class="tag">cgroups</span>
+        <span class="tag">chroot</span>
+      </div>
+    </article>
+
+    <!-- Skills -->
+    <article class="card skills">
+      <p class="card-label">Skills</p>
+      <h2 class="card-title">Technical Stack</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h4>Systems</h4>
+          <div class="tags">
+            <span class="tag">C</span>
+            <span class="tag">C++</span>
+            <span class="tag">Linux</span>
+            <span class="tag">Networking</span>
           </div>
         </div>
-
-        <aside class="hero-side reveal">
-          <div class="side-card">
-            <div class="stat-grid">
-              <div class="stat">
-                <span class="k">Core languages</span>
-                <span class="v">C / C++</span>
-              </div>
-              <div class="stat">
-                <span class="k">Primary stack</span>
-                <span class="v">Linux + Docker</span>
-              </div>
-              <div class="stat">
-                <span class="k">Backend work</span>
-                <span class="v">Flask / Sockets</span>
-              </div>
-              <div class="stat">
-                <span class="k">Mindset</span>
-                <span class="v">Discipline</span>
-              </div>
-            </div>
+        <div class="skill-group">
+          <h4>DevOps</h4>
+          <div class="tags">
+            <span class="tag">Docker</span>
+            <span class="tag">Terraform</span>
+            <span class="tag">OCI</span>
+            <span class="tag">CI/CD</span>
           </div>
-
-          <div class="side-card signal">
-            <div class="signal-row">
-              <span>Current direction</span>
-              <strong>Systems / DevOps</strong>
-            </div>
-            <div class="signal-row">
-              <span>Working style</span>
-              <strong>Practical, deep, precise</strong>
-            </div>
-            <div class="signal-row">
-              <span>Preferred environments</span>
-              <strong>Arch / Ubuntu</strong>
-            </div>
-            <div class="signal-row">
-              <span>Portfolio style</span>
-              <strong>Minimal, serious, readable</strong>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="section-head reveal">
-        <h2 class="section-title">About</h2>
-      </div>
-
-      <div class="grid-2">
-        <div class="panel reveal">
-          <p>
-            I am a student at the 1337 coding school, deeply focused on low-level programming,
-            containerization, and system architecture. I prefer understanding the mechanics first:
-            how memory is managed, how processes communicate, how Linux behaves, and how services are deployed.
-          </p>
         </div>
-
-        <div class="panel reveal">
-          <p>
-            I value discipline and continuous improvement. I work across Arch and Ubuntu environments,
-            and I recently founded a DevOps peer-learning club on campus to build practical infrastructure
-            understanding with others who want to go beyond theory.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="journey">
-      <div class="section-head reveal">
-        <h2 class="section-title">Journey</h2>
-      </div>
-
-      <div class="timeline">
-        <article class="timeline-item reveal">
-          <div class="timeline-time">Foundation</div>
-          <div class="timeline-body">
-            <h3>Built strong fundamentals in C and systems thinking</h3>
-            <p>
-              Started by learning how to think in terms of memory, pointers, processes, and control flow.
-              That foundation shaped how I approach every other layer of development.
-            </p>
-          </div>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-time">Practice</div>
-          <div class="timeline-body">
-            <h3>Worked on projects that force real understanding</h3>
-            <p>
-              From ft_printf and Get Next Line to Minishell, Push_swap, and a raycasting engine, I built
-              projects that require careful logic, debugging discipline, and attention to edge cases.
-            </p>
-          </div>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-time">Infrastructure</div>
-          <div class="timeline-body">
-            <h3>Moved toward backend and DevOps-shaped thinking</h3>
-            <p>
-              Docker, Linux environments, and deployment workflows became part of my daily toolkit.
-              The goal is to understand how software behaves outside the editor and beyond local execution.
-            </p>
-          </div>
-        </article>
-
-        <article class="timeline-item reveal">
-          <div class="timeline-time">Community</div>
-          <div class="timeline-body">
-            <h3>Founded a DevOps peer-learning club on campus</h3>
-            <p>
-              I wanted a space where the learning is practical, collaborative, and focused on real tools,
-              not just buzzwords. That experience sharpened how I explain, organize, and communicate technical ideas.
-            </p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="projects">
-      <div class="section-head reveal">
-        <h2 class="section-title">Selected Projects</h2>
-      </div>
-
-      <div class="projects">
-        <article class="panel project reveal">
-          <div class="project-top">
-            <h3 class="project-name">Webserv</h3>
-            <div class="project-role">Custom HTTP server</div>
-          </div>
-          <div class="project-content">
-            <div>
-              <p class="project-desc">
-                A custom HTTP server built from scratch in C++ with a team of three. It handles sockets,
-                non-blocking I/O, request parsing, multiple clients, and configuration files. The project
-                is a strong signal that I can reason about networked systems, state management, and server behavior.
-              </p>
-              <ul class="project-list">
-                <li>Built around socket programming and event-driven request handling</li>
-                <li>Focused on parsing, correctness, and predictable server responses</li>
-                <li>Useful proof of backend and protocol-level thinking</li>
-              </ul>
-            </div>
-            <div class="project-meta">
-              <div class="meta-box">
-                <div class="label">Repository</div>
-                <div class="value"><a href="https://github.com/Aymanesaj/webserv" target="_blank" rel="noreferrer">github.com/Aymanesaj/webserv</a></div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Stack</div>
-                <div class="value">C++ · sockets · parsing · non-blocking I/O</div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Outcome</div>
-                <div class="value">A real server implementation with production-style concerns</div>
-              </div>
-              <div class="project-links">
-                <a class="btn btn-secondary" href="https://github.com/Aymanesaj/webserv" target="_blank" rel="noreferrer">Open repo</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="panel project reveal">
-          <div class="project-top">
-            <h3 class="project-name">Inception</h3>
-            <div class="project-role">Containerized infrastructure</div>
-          </div>
-          <div class="project-content">
-            <div>
-              <p class="project-desc">
-                A system administration project centered on Dockerizing a complete infrastructure using Docker Compose.
-                It includes Nginx, WordPress, and MariaDB, and demonstrates how services are isolated, connected, and deployed
-                as a single environment.
-              </p>
-              <ul class="project-list">
-                <li>Shows practical container orchestration and service separation</li>
-                <li>Reinforces deployment thinking and infrastructure structure</li>
-                <li>Good evidence of DevOps interest and hands-on Linux fluency</li>
-              </ul>
-            </div>
-            <div class="project-meta">
-              <div class="meta-box">
-                <div class="label">Repository</div>
-                <div class="value"><a href="https://github.com/Aymanesaj/inception" target="_blank" rel="noreferrer">github.com/Aymanesaj/inception</a></div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Stack</div>
-                <div class="value">Docker · Compose · Nginx · WordPress · MariaDB</div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Outcome</div>
-                <div class="value">A working infrastructure built from modular services</div>
-              </div>
-              <div class="project-links">
-                <a class="btn btn-secondary" href="https://github.com/Aymanesaj/inception" target="_blank" rel="noreferrer">Open repo</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="panel project reveal">
-          <div class="project-top">
-            <h3 class="project-name">Raycasting Engine</h3>
-            <div class="project-role">Graphics / rendering</div>
-          </div>
-          <div class="project-content">
-            <div>
-              <p class="project-desc">
-                A 3D graphical engine built in C using MiniLibX. The project focuses on texture mapping,
-                optimized rendering, and turning a 2D map into a convincing first-person 3D experience.
-                It reflects comfort with math, rendering pipelines, and performance-sensitive code.
-              </p>
-              <ul class="project-list">
-                <li>Demonstrates spatial reasoning and real-time rendering concepts</li>
-                <li>Requires tight control over pixel drawing and frame updates</li>
-                <li>Useful proof that I can work across graphics and systems layers</li>
-              </ul>
-            </div>
-            <div class="project-meta">
-              <div class="meta-box">
-                <div class="label">Repository</div>
-                <div class="value"><a href="https://github.com/Aymanesaj/Cub3d" target="_blank" rel="noreferrer">github.com/Aymanesaj/Cub3d</a></div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Stack</div>
-                <div class="value">C · MiniLibX · textures · rendering</div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Outcome</div>
-                <div class="value">A working 3D engine with visual depth</div>
-              </div>
-              <div class="project-links">
-                <a class="btn btn-secondary" href="https://github.com/Aymanesaj/Cub3d" target="_blank" rel="noreferrer">Open repo</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="panel project reveal">
-          <div class="project-top">
-            <h3 class="project-name">Minishell</h3>
-            <div class="project-role">Shell / process control</div>
-          </div>
-          <div class="project-content">
-            <div>
-              <p class="project-desc">
-                A custom shell implementation featuring parsing, pipes, redirections, and process management.
-                The project forces a serious understanding of command execution, environment handling, and shell behavior.
-              </p>
-              <ul class="project-list">
-                <li>Strong evidence of process and execution model understanding</li>
-                <li>Involves parsing, redirection logic, and pipeline orchestration</li>
-                <li>Excellent bridge between systems programming and user-facing tooling</li>
-              </ul>
-            </div>
-            <div class="project-meta">
-              <div class="meta-box">
-                <div class="label">Repository</div>
-                <div class="value"><a href="https://github.com/Aymanesaj/minishell" target="_blank" rel="noreferrer">github.com/Aymanesaj/minishell</a></div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Stack</div>
-                <div class="value">C · parsing · pipes · redirections · processes</div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Outcome</div>
-                <div class="value">A practical shell with real command execution flow</div>
-              </div>
-              <div class="project-links">
-                <a class="btn btn-secondary" href="https://github.com/Aymanesaj/minishell" target="_blank" rel="noreferrer">Open repo</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="panel project reveal">
-          <div class="project-top">
-            <h3 class="project-name">Algorithm & Systems Suite</h3>
-            <div class="project-role">Foundations / problem solving</div>
-          </div>
-          <div class="project-content">
-            <div>
-              <p class="project-desc">
-                A grouped set of smaller but important projects: Push_swap, ft_printf, and Get Next Line.
-                Together they show my ability to work with constrained environments, memory, variadic functions,
-                static state, and algorithmic optimization.
-              </p>
-              <ul class="project-list">
-                <li>Push_swap for optimized sorting under strict rules</li>
-                <li>ft_printf for formatting logic and variadic handling</li>
-                <li>Get Next Line for buffered file reading with static memory</li>
-              </ul>
-            </div>
-            <div class="project-meta">
-              <div class="meta-box">
-                <div class="label">Repositories</div>
-                <div class="value">
-                  <a href="https://github.com/Aymanesaj/push_swap" target="_blank" rel="noreferrer">push_swap</a> ·
-                  <a href="https://github.com/Aymanesaj/ft_printf" target="_blank" rel="noreferrer">ft_printf</a> ·
-                  <a href="https://github.com/Aymanesaj/get_next_line" target="_blank" rel="noreferrer">get_next_line</a>
-                </div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Stack</div>
-                <div class="value">C · algorithms · memory · parsing · constraints</div>
-              </div>
-              <div class="meta-box">
-                <div class="label">Outcome</div>
-                <div class="value">Proof of strong fundamentals and implementation discipline</div>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="repos">
-      <div class="section-head reveal">
-        <h2 class="section-title">Repository Index</h2>
-      </div>
-
-      <div class="repo-grid">
-        <article class="repo-card reveal">
-          <h3>GitHub Profile</h3>
-          <p>A clean entry point for recruiters, classmates, and collaborators.</p>
-          <div class="repo">github.com/Aymanesaj</div>
-        </article>
-
-        <article class="repo-card reveal">
-          <h3>Most important repo</h3>
-          <p>Place your strongest public project here. For you, that is probably Webserv.</p>
-          <div class="repo">github.com/Aymanesaj/webserv</div>
-        </article>
-
-        <article class="repo-card reveal">
-          <h3>Infrastructure work</h3>
-          <p>Use this slot for Inception or any deployment-oriented project.</p>
-          <div class="repo">github.com/Aymanesaj/inception</div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section contact" id="contact">
-      <div class="contact-box reveal">
-        <div class="contact-grid">
-          <div>
-            <h2>Contact</h2>
-            <p>
-              Open to internships, collaborations, and serious engineering opportunities.
-              The cleanest way to reach me is through email.
-            </p>
-          </div>
-          <div class="contact-addr">
-            <div class="contact-email">contact@aymanesajed.com</div>
-            <a class="btn btn-primary" href="mailto:contact@aymanesajed.com">Send email</a>
+        <div class="skill-group">
+          <h4>Scripting</h4>
+          <div class="tags">
+            <span class="tag">Bash</span>
+            <span class="tag">Python</span>
           </div>
         </div>
       </div>
-    </section>
+    </article>
+
+    <!-- Leadership -->
+    <article class="card leadership">
+      <div class="leadership-icon" aria-hidden="true">⚡</div>
+      <p class="card-label">Community</p>
+      <h2 class="card-title">DevOps Student Club</h2>
+      <p>Founder of the DevOps Student Club at 1337. Organizing modern infrastructure discussions, hands-on workshops, and peer-learning sessions on cloud-native tooling and production practices.</p>
+    </article>
+
+    <!-- Social: Email -->
+    <a class="card social social-em" href="mailto:contact@aymanesajed.com" aria-label="Email">
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M2 7l10 7 10-7"/>
+        </svg>
+      </span>
+      <span class="label">Email</span>
+    </a>
+
+    <!-- Social: Website -->
+    <a class="card social social-web" href="https://aymanesajed.com" target="_blank" rel="noopener noreferrer" aria-label="Website">
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </span>
+      <span class="label">Website</span>
+    </a>
 
   </main>
+
+  <footer class="footer">
+    <span>©</span> 2026 Aymane Sajed — built with HTML &amp; CSS
+  </footer>
+
 </div>
 
-<script>
-  const reveals = document.querySelectorAll(".reveal");
-  const navLinks = Array.from(document.querySelectorAll(".nav a"));
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
-    });
-  }, { threshold: 0.12 });
-
-  reveals.forEach((el) => revealObserver.observe(el));
-
-  const sections = ["about", "journey", "projects", "repos", "contact"]
-    .map(id => document.getElementById(id))
-    .filter(Boolean);
-
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.id;
-      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${id}`));
-    });
-  }, { threshold: 0.45, rootMargin: "-15% 0px -35% 0px" });
-
-  sections.forEach(section => navObserver.observe(section));
-</script>
 </body>
 </html>
